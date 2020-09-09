@@ -4,8 +4,10 @@ import subprocess
 import json
 
 app = Flask(__name__)
-basedir = "E:\\kalashnikov\\notes"
-home = "home"
+basedir = ""
+home = ""
+host = "0.0.0.0"
+port = 5000
 
 @app.route("/")
 def index():
@@ -23,4 +25,4 @@ def showpage(title):
             convertedmd=Markup(html_data), title=title)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host=host, port=port)
