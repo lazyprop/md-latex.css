@@ -4,19 +4,16 @@ import subprocess
 import json
 
 app = Flask(__name__)
-basedir = ""
-home = ""
-host = "0.0.0.0"
-port = 5000
+config = json.loads(open("config.json", "r").read())
 
 @app.route("/")
 def index():
-    return redirect("/{}".format(home))
+    return redirect("/{}".format(config["home"]))
 
-@app.route("/<title>")
+@app.route("/<title>.md")
 def showpage(title):
     filename = title + ".md"
-    path_to_file = os.path.join(basedir, filename)
+    path_to_file = os.path.join(config["basedir"], filename)
     html_data = subprocess.run([
         "pandoc", path_to_file, "--mathjax"], stdout=subprocess.PIPE
         ).stdout.decode("utf-8")
@@ -25,4 +22,4 @@ def showpage(title):
             convertedmd=Markup(html_data), title=title)
 
 if __name__ == "__main__":
-    app.run(debug=True, host=host, port=port)
+    app.run(host=config["host"], port=config["port"], debug = True)
