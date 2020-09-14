@@ -2,6 +2,7 @@ from flask import Flask, render_template, Markup, redirect
 import os
 import subprocess
 import json
+import livereload
 
 app = Flask(__name__)
 config = json.loads(open("config.json", "r").read())
@@ -22,4 +23,6 @@ def showpage(title):
             convertedmd=Markup(html_data), title=title)
 
 if __name__ == "__main__":
-    app.run(host=config["host"], port=config["port"], debug = True)
+    reloadserver = livereload.Server(app.wsgi_app)
+    reloadserver.watch(os.path.join(config["basedir"], "*.md"))
+    reloadserver.serve()
