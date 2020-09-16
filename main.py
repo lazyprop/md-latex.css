@@ -15,7 +15,7 @@ def index():
 def showpage(subpath):
     abs_path = os.path.join(config["basedir"], subpath + ".md")
     html_data = pypandoc.convert_file(abs_path, to="html", extra_args=["-s",
-        "--mathjax", "-c", "https://latex.now.sh/style.css"])
+        "--mathjax", "-c", "static/latex-css/style.css"])
     return html_data
 
 if __name__ == "__main__":
