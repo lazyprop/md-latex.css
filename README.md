@@ -7,3 +7,4 @@ goals:
 - [x] find a way to put things in separate folders and still be able to use them.
 - [x] add live reload
 - [ ] add syntax highlighting
+- [ ] serve js and css
