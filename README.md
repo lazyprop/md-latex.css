@@ -2,8 +2,8 @@ because i dont like [gollum](https://github.com/gollum/gollum) or [ruby](https:/
 
 TODO:
 - add support for filters:
-    * mermaid: [homepage](https://mermaid-js.github.io/mermaid/#/). [filter](https://github.com/timofurrer/pandoc-mermaid-filter)
     * [pandoc-plot](https://github.com/LaurentRDC/pandoc-plot)
+    * [mermaid](https://mermaid-js.github.io/mermaid/#/). [filter](https://github.com/timofurrer/pandoc-mermaid-filter)
     * [mathjax-mhchem](https://mhchem.github.io/MathJax-mhchem/)
 - add support for rmarkdown
 - write installation script for everything

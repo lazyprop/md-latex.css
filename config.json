@@ -2,5 +2,6 @@
     "basedir": "E:\\kalashnikov\\notes",
     "home": "home.md",
     "host": "0.0.0.0",
-    "port": 8008
+    "port": 8008,
+    "plot-config": "E:\\kalashnikov\\notes\\plot-config.yml"
 }
