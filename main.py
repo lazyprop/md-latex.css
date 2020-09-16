@@ -1,8 +1,8 @@
-from flask import Flask, render_template, Markup, redirect
+from flask import Flask, Markup, redirect
 import os
-import subprocess
 import json
 import livereload
+import pypandoc
 
 app = Flask(__name__)
 config = json.loads(open("config.json", "r").read())
@@ -13,17 +13,12 @@ def index():
 
 @app.route("/<path:subpath>.md")
 def showpage(subpath):
-    path_to_file = os.path.join(config["basedir"], subpath + ".md")
-    html_data = subprocess.run([
-        "pandoc", path_to_file, "--mathjax", "-s", "-c",
-        "https://latex.now.sh/style.css"],
-        stdout=subprocess.PIPE).stdout#.decode("utf-8")
-
-    # return render_template("index.html",
-            # content=Markup(html_data), title=subpath)
+    abs_path = os.path.join(config["basedir"], subpath + ".md")
+    html_data = pypandoc.convert_file(abs_path, to="html", extra_args=["-s",
+        "--mathjax", "-c", "https://latex.now.sh/style.css"])
     return html_data
 
 if __name__ == "__main__":
     reloadserver = livereload.Server(app.wsgi_app)
     reloadserver.watch(os.path.join(config["basedir"], "*.md"))
-    reloadserver.serve()
+    reloadserver.serve(host=config["host"], port=config["port"], debug=True)
